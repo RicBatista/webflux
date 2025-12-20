@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin@webfluxcluster.u6la2wn.mongodb.net/webflux?appName=webfluxCluster
+
