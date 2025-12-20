@@ -1,5 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://admin:admin@webfluxcluster.u6la2wn.mongodb.net/webflux?appName=webfluxCluster
-
+      uri: mongodb+srv://${DB_USER}admin:${DB_PASSWORD}@webfluxcluster.u6la2wn.mongodb.net/webflux?appName=webfluxCluster
