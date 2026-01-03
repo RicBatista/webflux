@@ -18,6 +18,5 @@ public class StandardError implements Serializable {
     private LocalDateTime timestamp;
     private String path;
     private String message;
-    private HttpStatus status;
     private String error;
 }
