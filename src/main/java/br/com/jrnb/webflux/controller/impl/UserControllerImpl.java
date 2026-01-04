@@ -1,8 +1,10 @@
 package br.com.jrnb.webflux.controller.impl;
 
 import br.com.jrnb.webflux.controller.UserController;
+import br.com.jrnb.webflux.mapper.UserMapper;
 import br.com.jrnb.webflux.model.request.UserRequest;
 import br.com.jrnb.webflux.model.response.UserResponse;
+import br.com.jrnb.webflux.repository.UserRepository;
 import br.com.jrnb.webflux.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,9 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
 public class UserControllerImpl implements UserController {
+
     private final UserService userService;
+    private final UserMapper userMapper;
 
 
     @Override
@@ -28,7 +32,10 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity<Mono<UserResponse>> findById(String id) {
-        return null;
+
+        return ResponseEntity.ok().body(
+                userService.findById(id).map(userMapper::toResponse)
+        );
     }
 
     @Override
