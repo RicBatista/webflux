@@ -4,6 +4,7 @@ import br.com.jrnb.webflux.entity.User;
 import br.com.jrnb.webflux.mapper.UserMapper;
 import br.com.jrnb.webflux.model.request.UserRequest;
 import br.com.jrnb.webflux.repository.UserRepository;
+import br.com.jrnb.webflux.service.exception.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -24,7 +25,10 @@ public class UserService {
     }
 
     public Mono<User> findById(final String id) {
-        return userRepository.findById(id);
+        return userRepository.findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ObjectNotFoundException("User not found with id " + id)
+                ));
     }
 
     public Mono<User> findByEmail(final String email) {
