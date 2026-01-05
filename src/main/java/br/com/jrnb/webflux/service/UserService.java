@@ -27,22 +27,11 @@ public class UserService {
     }
 
     public Mono<User> findById(final String id) {
-        return userRepository.findById(id)
-                .switchIfEmpty(Mono.error(
-                        new ObjectNotFoundException("User not found with id " + id)
-                ));
+        return handlerNotFound(userRepository.findById(id), id);
     }
 
     public Flux<User> findAll() {
         return userRepository.findAll();
-    }
-
-    public Mono<User> findByEmail(final String email) {
-        return null;
-    }
-
-    public Mono<User> findByUsername(final String username) {
-        return null;
     }
 
     public Mono<User> update(final String id, final UserRequest userRequest) {
@@ -51,27 +40,14 @@ public class UserService {
                 .flatMap(userRepository::save);
     }
 
-    public Mono<User> findByEmailAndPassword(final String email, final String password) {
-        return null;
+    public Mono<User> delete(final String id) {
+        return handlerNotFound(userRepository.findAndRemove(id), id);
     }
 
-    public Mono<User> findByUsernameAndPassword(final String username, final String password) {
-        return null;
+    private <T> Mono<T> handlerNotFound(Mono<T> mono, String id) {
+        return mono.switchIfEmpty(Mono.error(
+                new ObjectNotFoundException("User not found with id " + id)
+        ));
     }
 
-    public Mono<User> findByEmailOrUsername(final String email, final String username) {
-        return null;
-    }
-
-    public Mono<User> findByUsernameOrEmail(final String username, final String email) {
-        return null;
-    }
-
-    public Mono<User> findByUsernameOrEmailAndPassword(final String username, final String password) {
-        return null;
-    }
-
-    public Mono<User> findByUsernameAndEmail(final String username, final String email) {
-        return null;
-    }
 }

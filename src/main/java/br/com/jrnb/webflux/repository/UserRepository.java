@@ -1,9 +1,10 @@
 package br.com.jrnb.webflux.repository;
 
 import br.com.jrnb.webflux.entity.User;
-import br.com.jrnb.webflux.model.request.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,7 +27,10 @@ public class UserRepository {
         return template.findAll(User.class);
     }
 
-//    public Mono<User> update(final String id, final UserRequest userRequest) {
-//        return template.update(User.class);
-//    }
+    public Mono<User> findAndRemove(String id) {
+        Query query = new Query();
+        Criteria criteria = Criteria.where("id").is(id);
+
+        return template.findAndRemove(query.addCriteria(criteria), User.class);
+    }
 }
