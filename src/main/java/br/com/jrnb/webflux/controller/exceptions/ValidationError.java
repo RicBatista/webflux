@@ -19,8 +19,8 @@ public class ValidationError extends StandardError implements Serializable {
 
     private final List<FieldError> fieldErrors = new ArrayList<>();
 
-    ValidationError(LocalDateTime timestamp, String path, String message, String error) {
-        super(timestamp, path, message, error);
+    ValidationError(LocalDateTime timestamp, String path, String message, String error, Integer status) {
+        super(timestamp, path, message, error, status);
     }
 
 

@@ -4,11 +4,9 @@ import br.com.jrnb.webflux.controller.UserController;
 import br.com.jrnb.webflux.mapper.UserMapper;
 import br.com.jrnb.webflux.model.request.UserRequest;
 import br.com.jrnb.webflux.model.response.UserResponse;
-import br.com.jrnb.webflux.repository.UserRepository;
 import br.com.jrnb.webflux.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +38,10 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity<Flux<UserResponse>> findAll() {
-        return null;
+
+        return ResponseEntity.ok().body(
+                userService.findAll().map(userMapper::toResponse)
+        );
     }
 
     @Override

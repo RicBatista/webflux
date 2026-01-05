@@ -2,7 +2,6 @@ package br.com.jrnb.webflux.controller.exceptions;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -19,4 +18,5 @@ public class StandardError implements Serializable {
     private String path;
     private String message;
     private String error;
+    private Integer status;
 }
