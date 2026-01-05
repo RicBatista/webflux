@@ -6,7 +6,6 @@ import br.com.jrnb.webflux.model.request.UserRequest;
 import br.com.jrnb.webflux.repository.UserRepository;
 import br.com.jrnb.webflux.service.exception.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,11 +18,6 @@ public class UserService {
 
     public Mono<User> save(final UserRequest request) {
         return userRepository.save(userMapper.toEntity(request));
-    }
-
-    public Mono<User> update(final UserRequest request) {
-
-        return null;
     }
 
     public Mono<User> findById(final String id) {
