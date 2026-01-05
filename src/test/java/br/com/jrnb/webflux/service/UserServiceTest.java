@@ -49,4 +49,20 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).save(any(User.class));
     }
+
+    @Test
+    void findById() {
+    }
+
+    @Test
+    void findAll() {
+    }
+
+    @Test
+    void update() {
+    }
+
+    @Test
+    void delete() {
+    }
 }
