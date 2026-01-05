@@ -45,6 +45,12 @@ public class UserService {
         return null;
     }
 
+    public Mono<User> update(final String id, final UserRequest userRequest) {
+        return findById(id)
+                .map(entity -> userMapper.toEntity(userRequest, entity))
+                .flatMap(userRepository::save);
+    }
+
     public Mono<User> findByEmailAndPassword(final String email, final String password) {
         return null;
     }

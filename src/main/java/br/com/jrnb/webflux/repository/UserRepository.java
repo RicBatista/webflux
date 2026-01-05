@@ -1,6 +1,7 @@
 package br.com.jrnb.webflux.repository;
 
 import br.com.jrnb.webflux.entity.User;
+import br.com.jrnb.webflux.model.request.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,8 @@ public class UserRepository {
     public Flux<User> findAll() {
         return template.findAll(User.class);
     }
+
+//    public Mono<User> update(final String id, final UserRequest userRequest) {
+//        return template.update(User.class);
+//    }
 }
